@@ -5,6 +5,7 @@ import logging
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import (MessageHandler, Filters)
+import random
 
 import config
 
@@ -18,18 +19,34 @@ logger = logging.getLogger(__name__)
 def get_full_name(update):
     return update.message.from_user.first_name + " " + update.message.from_user.last_name
 
+def get_username(update):
+    return update.message.from_user.username
+
+def get_phrase():
+    return random.choice (["Giappo?", "Neural Networks?", "Cammello?"])
+
 #############################
 #         commands          #
 #############################
 def start(bot, update):
     chat_id = update.message.chat_id
-    logger.debug('start command received from chat "%s"' % (chat_id))
+    logger.debug('[%s] start command received' % (chat_id))
     bot.send_message(chat_id=chat_id, text="biellibot is under aggressive development")
 
 def read(bot, update):
     chat_id = update.message.chat_id
-    logger.debug('read a message from chat "%s"' % (chat_id))
-    bot.send_message(chat_id=chat_id, text="maledetto bielli")
+    logger.debug('[%s] read a message from chat' % (chat_id))
+    username = get_username(update)
+    logger.debug('[%s] sender is "%s"' % (chat_id, username))
+
+    if username == 'stebielli':
+        bot.send_message(chat_id=chat_id, text="maledetto bielli")
+    else:
+        rnd = random.randint(0, 9)
+        logger.debug('[%s] generated random "%s"' % (chat_id, rnd))
+        if(rnd < 3):
+            bot.send_message(chat_id=chat_id, text=get_phrase())
+
 
 def error(bot, update, error):
     logger.error('Update "%s" caused error "%s"' % (update, error))
