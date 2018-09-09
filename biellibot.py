@@ -16,11 +16,15 @@ logger = logging.getLogger(__name__)
 #############################
 #         functions         #
 #############################
+
+
 def get_full_name(update):
     return update.message.from_user.first_name + " " + update.message.from_user.last_name
 
+
 def get_username(update):
     return update.message.from_user.username
+
 
 def get_phrase():
     return random.choice([
@@ -30,15 +34,19 @@ def get_phrase():
         "E comunque io ho contato 23 sedie",
         "Soy un malparido",
         "Cazzo dovevo andare a basket stasera!"
-        ])
+    ])
 
 #############################
 #         commands          #
 #############################
+
+
 def start(bot, update):
     chat_id = update.message.chat_id
     logger.debug('[%s] start command received' % (chat_id))
-    bot.send_message(chat_id=chat_id, text="biellibot is under aggressive development")
+    bot.send_message(
+        chat_id=chat_id, text="biellibot is under aggressive development")
+
 
 def read(bot, update):
     chat_id = update.message.chat_id
@@ -64,6 +72,8 @@ def error(bot, update, error):
 #############################
 #           main            #
 #############################
+
+
 def main():
     config.read_config('settings.json')
 
@@ -86,6 +96,7 @@ def main():
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT, SIGTERM or SIGABRT.
     updater.idle()
+
 
 if __name__ == '__main__':
     main()
