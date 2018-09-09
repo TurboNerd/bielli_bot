@@ -5,6 +5,7 @@ logger = logging.getLogger(__name__)
 
 raw_config = {}
 
+
 def read_config(file):
     global raw_config
     with open(file) as json_file:

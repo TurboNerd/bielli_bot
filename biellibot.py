@@ -10,7 +10,8 @@ import random
 import config
 
 # enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+logFormat = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+logging.basicConfig(format=logFormat, level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 #############################
@@ -54,16 +55,24 @@ def read(bot, update):
     username = get_username(update)
     logger.debug('[%s] sender is "%s"' % (chat_id, username))
     if username == 'stebielli':
-        phrase = random.choice([
-            "Maledetto Bielli",
-            "Maldito Bielli"
-        ])
-        bot.send_message(chat_id=chat_id, text=phrase)
+        talk_to_bielli(bot, chat_id)
     else:
-        rnd = random.randint(0, 9)
-        logger.debug('[%s] generated random "%s"' % (chat_id, rnd))
-        if(rnd < 3):
-            bot.send_message(chat_id=chat_id, text=get_phrase())
+        talk_to_all_the_others(bot, chat_id)
+
+
+def talk_to_bielli(bot, chat_id):
+    phrase = random.choice([
+        "Maledetto Bielli",
+        "Maldito Bielli"
+    ])
+    bot.send_message(chat_id=chat_id, text=phrase)
+
+
+def talk_to_all_the_others(bot, chat_id):
+    rnd = random.randint(0, 9)
+    logger.debug('[%s] generated random "%s"' % (chat_id, rnd))
+    if(rnd < 3):
+        bot.send_message(chat_id=chat_id, text=get_phrase())
 
 
 def error(bot, update, error):
