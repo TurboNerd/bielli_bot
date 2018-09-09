@@ -23,7 +23,14 @@ def get_username(update):
     return update.message.from_user.username
 
 def get_phrase():
-    return random.choice (["Giappo?", "Neural Networks?", "Cammello?"])
+    return random.choice([
+        "Giappo?",
+        "Neural Networks?",
+        "Cammello?",
+        "E comunque io ho contato 23 sedie",
+        "Soy un malparido",
+        "Cazzo dovevo andare a basket stasera!"
+        ])
 
 #############################
 #         commands          #
@@ -38,9 +45,12 @@ def read(bot, update):
     logger.debug('[%s] read a message from chat' % (chat_id))
     username = get_username(update)
     logger.debug('[%s] sender is "%s"' % (chat_id, username))
-
     if username == 'stebielli':
-        bot.send_message(chat_id=chat_id, text="maledetto bielli")
+        phrase = random.choice([
+            "Maledetto Bielli",
+            "Maldito Bielli"
+        ])
+        bot.send_message(chat_id=chat_id, text=phrase)
     else:
         rnd = random.randint(0, 9)
         logger.debug('[%s] generated random "%s"' % (chat_id, rnd))
