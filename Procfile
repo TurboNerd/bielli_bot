@@ -1,1 +1,1 @@
-web: python biellibot.py
+worker: python biellibot.py
