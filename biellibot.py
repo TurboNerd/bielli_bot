@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import logging
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
@@ -84,9 +85,16 @@ def error(bot, update, error):
 
 
 def main():
-    config.read_config('settings.json')
+    try:
+        config.read_config('settings.json')
+        telegram_key = config.get_telegram_key()
+    except FileNotFoundError as e:
+        logger.warn('No configuration file found, fallback to env variable for API key. Cause: %s' % (e))
+        telegram_key = os.environ.get('TELEGRAM_API_KEY')
+        if telegram_key is None:
+           raise ValueError('TELEGRAM_API_KEY variable not set')
 
-    updater = Updater(token=config.get_telegram_key())
+    updater = Updater(token=telegram_key)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
