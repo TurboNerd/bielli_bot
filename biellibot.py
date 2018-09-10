@@ -72,7 +72,7 @@ def talk_to_bielli(bot, chat_id):
 def talk_to_all_the_others(bot, chat_id):
     rnd = random.randint(0, 9)
     logger.debug('[%s] generated random "%s"' % (chat_id, rnd))
-    if(rnd < 3):
+    if(rnd <= 3):
         bot.send_message(chat_id=chat_id, text=get_phrase())
 
 
