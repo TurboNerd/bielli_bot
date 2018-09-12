@@ -35,7 +35,8 @@ def get_phrase():
         "Cammello?",
         "E comunque io ho contato 23 sedie",
         "Soy un malparido",
-        "Cazzo dovevo andare a basket stasera!"
+        "Cazzo dovevo andare a basket stasera!",
+        "Ma voi come lo spegnete lo zampirone?"
     ])
 
 #############################
