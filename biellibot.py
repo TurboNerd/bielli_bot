@@ -37,7 +37,8 @@ def get_phrase():
         "Soy un malparido",
         "Cazzo dovevo andare a basket stasera!",
         "Ma voi come lo spegnete lo zampirone?",
-        "Quello non è il mio 3"
+        "Quello non è il mio 3",
+        "I minori di 14 anni non possono giocare all'Xbox in carcere, perchè sono in carcere!"
     ])
 
 #############################
